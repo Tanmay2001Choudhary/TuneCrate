@@ -59,7 +59,6 @@ const Player = ({ toggleFavorite, favorites }) => {
         tagName === 'textarea' ||
         document.activeElement.isContentEditable
       ) {
-        console.log('Input field is focused, ignoring key press.')
         return
       }
       const isCtrl = e.ctrlKey || e.metaKey
@@ -172,6 +171,19 @@ const Player = ({ toggleFavorite, favorites }) => {
     })
   }
 
+  const handleVolumeTouchStart = () => {
+    setShowVolumeSlider(true)
+    if (volumeHoverTimeout) {
+      clearTimeout(volumeHoverTimeout)
+    }
+
+    const timeout = setTimeout(() => {
+      setShowVolumeSlider(false)
+    }, 1000)
+
+    setVolumeHoverTimeout(timeout)
+  }
+
   return (
     <div className='player'>
       <div className='progress-bar-container'>
@@ -254,6 +266,7 @@ const Player = ({ toggleFavorite, favorites }) => {
             className='volume-control'
             onMouseEnter={handleVolumeMouseEnter}
             onMouseLeave={handleVolumeMouseLeave}
+            onTouchStart={handleVolumeTouchStart}
           >
             <div className='control-wrapper' onClick={toggleMute}>
               <span className='control-icon volume-icon'>
