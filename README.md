@@ -60,3 +60,7 @@ yarn dev
 4. **Open the application**
 
 Open your browser and navigate to `http://localhost:5173` (Vite's default port)
+
+4. **Live the application**
+
+Live demo https://tunecrate.vercel.app/
